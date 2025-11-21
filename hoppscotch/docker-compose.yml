@@ -1,0 +1,50 @@
+services:
+  migration:
+    image: hoppscotch/hoppscotch:latest
+    container_name: migration
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    command: sh -c "pnpx prisma migrate deploy"
+    restart: "no"
+
+  mail:
+    image: dockage/mailcatcher:0.9.0
+    container_name: mail
+    ports:
+      - "1025:1025"   # SMTP port
+      - "1080:1080"   # Web UI to view emails
+
+  hoppscotch:
+    image: hoppscotch/hoppscotch:latest
+    container_name: hoppscotch
+    restart: unless-stopped
+    ports:
+      - "3000:3000"   # Frontend
+      - "3100:3100"   # Admin Dashboard
+      - "3170:3170"   # Backend GraphQL
+      - "3200:3200"   # Bundle Server
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - migration
+      - mail
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: hoppscotch-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: hoppscotch
+      POSTGRES_PASSWORD: hoppscotchpass
+      POSTGRES_DB: hoppscotchdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdb:/var/lib/postgresql/data
+
+volumes:
+  pgdb:
+
