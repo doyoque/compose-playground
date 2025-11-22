@@ -13,5 +13,8 @@ services:
       - DB_SQLITE_VACUUM_ON_STARTUP=true
       - EXECUTIONS_PROCESS=main
     volumes:
-      - ./data:/home/node/.n8n
+      - n8n_data:/home/node/.n8n
+
+volumes:
+  n8n_data:
 
