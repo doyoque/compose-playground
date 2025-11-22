@@ -4,3 +4,4 @@ n8n/**/*.log
 n8n/*.json
 n8n/config
 n8n/data/
+main
