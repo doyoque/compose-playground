@@ -13,6 +13,10 @@ static int change_to_stack_dir(const char *stack_name, char *path_out) {
         snprintf(path_out, MAX_PATH_LEN, "../eventstream");
     } else if (strcmp(stack_name, "databases") == 0) {
         snprintf(path_out, MAX_PATH_LEN, "../databases");
+    } else if (strcmp(stack_name, "monitoring") == 0) {
+        snprintf(path_out, MAX_PATH_LEN, "../monitoring");
+    } else if (strcmp(stack_name, "appwrite") == 0) {
+        snprintf(path_out, MAX_PATH_LEN, "../misc/appwrite");
     } else {
         snprintf(path_out, MAX_PATH_LEN, "%s/%s", STACK_BASE_DIR, stack_name);
     }

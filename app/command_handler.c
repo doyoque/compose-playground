@@ -8,6 +8,8 @@ void print_usage(const char *program_name) {
     fprintf(stderr, "\nCommands:\n");
     fprintf(stderr, "  stack <stack_name>  Start a Docker Compose stack\n");
     fprintf(stderr, "  stop <stack_name>   Stop a Docker Compose stack\n");
+    fprintf(stderr, "\nAvailable stacks:\n");
+    fprintf(stderr, "  appwrite, eventstream, databases, monitoring, or any stack in ../misc/\n");
 }
 
 static int handle_stack_command(int argc, char *argv[]) {
